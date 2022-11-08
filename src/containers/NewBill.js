@@ -22,6 +22,8 @@ export default class NewBill {
     const fileName = filePath[filePath.length-1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
+    this.checkFile(fileName)
+
     formData.append('file', file)
     formData.append('email', email)
 
@@ -30,11 +32,12 @@ export default class NewBill {
       .create({
         data: formData,
         headers: {
+          //'Content-Type': 'multipart/form-data'
           noContentType: true
         }
       })
       .then(({fileUrl, key}) => {
-        console.log(fileUrl)
+        //returns undefined
         this.billId = key
         this.fileUrl = fileUrl
         this.fileName = fileName
@@ -73,4 +76,14 @@ export default class NewBill {
       .catch(error => console.error(error))
     }
   }
+
+  //check if the file is a png or jpeg
+    checkFile = (file) => {
+        const fileExtension = file.split('.').pop()
+      //return error if the file is not a png or jpeg
+        if (fileExtension !== 'png' && fileExtension !== 'jpeg' && fileExtension !== 'jpg') {
+            throw new Error('The file must be a png or jpeg')
+        }
+        return file
+    }
 }

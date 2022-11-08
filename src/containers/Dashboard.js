@@ -86,6 +86,7 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
+
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
     if (this.counter % 2 === 0) {
@@ -108,6 +109,9 @@ export default class {
     $('#icon-eye-d').click(this.handleClickIconEye)
     $('#btn-accept-bill').click((e) => this.handleAcceptSubmit(e, bill))
     $('#btn-refuse-bill').click((e) => this.handleRefuseSubmit(e, bill))
+
+    //il fallait remettre le compteur à 0 quand on change de ticket
+    this.counter = 0
   }
 
   handleAcceptSubmit = (e, bill) => {
@@ -131,6 +135,7 @@ export default class {
   }
 
   handleShowTickets(e, bills, index) {
+    console.log('handleShowTickets', e)
     if (this.counter === undefined || this.index !== index) this.counter = 0
     if (this.index === undefined || this.index !== index) this.index = index
     if (this.counter % 2 === 0) {
@@ -148,6 +153,7 @@ export default class {
     bills.forEach(bill => {
       $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
     })
+
 
     return bills
 
