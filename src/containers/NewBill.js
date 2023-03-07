@@ -19,50 +19,52 @@ export default class NewBill {
     e.preventDefault()
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
-    const fileName = filePath[filePath.length-1]
+    const fileName = filePath[filePath.length - 1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
-    this.checkFile(fileName)
+    if (!this.checkFileExtension(fileName.split('.').pop())) return false;
 
     formData.append('file', file)
     formData.append('email', email)
 
     this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          //'Content-Type': 'multipart/form-data'
-          noContentType: true
-        }
-      })
-      .then(({fileUrl, key}) => {
-        //returns undefined
-        this.billId = key
-        this.fileUrl = fileUrl
-        this.fileName = fileName
-      }).catch(error => console.error(error))
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            //'Content-Type': 'multipart/form-data'
+            noContentType: true
+          }
+        })
+        .then(({fileUrl, key}) => {
+          //returns undefined
+          this.billId = key
+          this.fileUrl = fileUrl
+          this.fileName = fileName
+        }).catch(error => console.error(error))
   }
-  handleSubmit = e => {
-    e.preventDefault()
-    console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
-    const email = JSON.parse(localStorage.getItem("user")).email
-    const bill = {
-      email,
-      type: e.target.querySelector(`select[data-testid="expense-type"]`).value,
-      name:  e.target.querySelector(`input[data-testid="expense-name"]`).value,
-      amount: parseInt(e.target.querySelector(`input[data-testid="amount"]`).value),
-      date:  e.target.querySelector(`input[data-testid="datepicker"]`).value,
-      vat: e.target.querySelector(`input[data-testid="vat"]`).value,
-      pct: parseInt(e.target.querySelector(`input[data-testid="pct"]`).value) || 20,
-      commentary: e.target.querySelector(`textarea[data-testid="commentary"]`).value,
-      fileUrl: this.fileUrl,
-      fileName: this.fileName,
-      status: 'pending'
+
+    handleSubmit = e => {
+      e.preventDefault()
+      console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
+      const email = JSON.parse(localStorage.getItem("user")).email
+      const bill = {
+        email,
+        type: e.target.querySelector(`select[data-testid="expense-type"]`).value,
+        name: e.target.querySelector(`input[data-testid="expense-name"]`).value,
+        amount: parseInt(e.target.querySelector(`input[data-testid="amount"]`).value),
+        date: e.target.querySelector(`input[data-testid="datepicker"]`).value,
+        vat: e.target.querySelector(`input[data-testid="vat"]`).value,
+        pct: parseInt(e.target.querySelector(`input[data-testid="pct"]`).value) || 20,
+        commentary: e.target.querySelector(`textarea[data-testid="commentary"]`).value,
+        fileUrl: this.fileUrl,
+        fileName: this.fileName,
+        status: 'pending'
+      }
+      this.updateBill(bill)
+      this.onNavigate(ROUTES_PATH['Bills'])
     }
-    this.updateBill(bill)
-    this.onNavigate(ROUTES_PATH['Bills'])
-  }
+
 
   // not need to cover this function by tests
   updateBill = (bill) => {
@@ -78,12 +80,18 @@ export default class NewBill {
   }
 
   //check if the file is a png or jpeg
-    checkFile = (file) => {
-        const fileExtension = file.split('.').pop()
-      //return error if the file is not a png or jpeg
-        if (fileExtension !== 'png' && fileExtension !== 'jpeg' && fileExtension !== 'jpg') {
-            throw new Error('The file must be a png or jpeg')
-        }
-        return file
-    }
+  // checkFile = (file) => {
+  //     const fileExtension = file.split('.').pop()
+  //   //return error if the file is not a png or jpeg
+  //     if (fileExtension !== 'png' && fileExtension !== 'jpeg' && fileExtension !== 'jpg') {
+  //         //throw new Error('The file must be a png or jpeg')
+  //         return false
+  //     }
+  //     return file
+  // }
+
+
+  checkFileExtension = (ext) => {
+    return ['png', 'jpeg', 'jpg'].includes(ext)
+  }
 }
