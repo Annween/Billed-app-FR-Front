@@ -2,6 +2,7 @@ import {ROUTES_PATH} from '../constants/routes.js'
 import {formatDate, formatStatus} from "../app/format.js"
 import Logout from "./Logout.js"
 
+
 export default class {
     constructor({document, onNavigate, store, localStorage}) {
         this.document = document
@@ -28,9 +29,8 @@ export default class {
     }
 
     getBills = () => {
-        console.log('ok')
+        console.log("Coucou petit coeur")
         if (this.store) {
-            console.log(this.store)
             return this.store
                 .bills()
                 .list()
@@ -57,10 +57,9 @@ export default class {
                     console.log('length', bills.length)
                     return bills
                 }).catch((e) => {
+                    console.log("ERROROROROROROR:", e)
                     console.log(e)
-
                 })
-
         }
     }
 }

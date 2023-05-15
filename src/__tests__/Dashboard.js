@@ -6,7 +6,7 @@ import {fireEvent, screen, waitFor} from "@testing-library/dom"
 import userEvent from '@testing-library/user-event'
 import DashboardFormUI from "../views/DashboardFormUI.js"
 import DashboardUI from "../views/DashboardUI.js"
-import Dashboard, { filteredBills, cards } from "../containers/Dashboard.js"
+import Dashboard, { filterBills, cards } from "../containers/Dashboard.js"
 import { ROUTES, ROUTES_PATH } from "../constants/routes"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import mockStore from "../__mocks__/store"
@@ -18,19 +18,19 @@ jest.mock("../app/store", () => mockStore)
 describe('Given I am connected as an Admin', () => {
   describe('When I am on Dashboard page, there are bills, and there is one pending', () => {
     test('Then, filteredBills by pending status should return 1 bill', () => {
-      const filtered_bills = filteredBills(bills, "pending")
+      const filtered_bills = filterBills(bills, "pending")
       expect(filtered_bills.length).toBe(1)
     })
   })
   describe('When I am on Dashboard page, there are bills, and there is one accepted', () => {
     test('Then, filteredBills by accepted status should return 1 bill', () => {
-      const filtered_bills = filteredBills(bills, "accepted")
+      const filtered_bills = filterBills(bills, "accepted")
       expect(filtered_bills.length).toBe(1)
     })
   })
   describe('When I am on Dashboard page, there are bills, and there is two refused', () => {
     test('Then, filteredBills by accepted status should return 2 bills', () => {
-      const filtered_bills = filteredBills(bills, "refused")
+      const filtered_bills = filterBills(bills, "refused")
       expect(filtered_bills.length).toBe(2)
     })
   })

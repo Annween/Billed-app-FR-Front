@@ -17,6 +17,8 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     e.preventDefault()
+
+    console.log('e.target.value', e.target.value)
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length - 1]
@@ -32,8 +34,7 @@ export default class NewBill {
         .create({
           data: formData,
           headers: {
-            //'Content-Type': 'multipart/form-data'
-            noContentType: true
+            'Content-Type': 'multipart/form-data',
           }
         })
         .then(({fileUrl, key}) => {
