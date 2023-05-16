@@ -29,7 +29,6 @@ export default class {
     }
 
     getBills = () => {
-        console.log("Coucou petit coeur")
         if (this.store) {
             return this.store
                 .bills()
@@ -57,7 +56,6 @@ export default class {
                     console.log('length', bills.length)
                     return bills
                 }).catch((e) => {
-                    console.log("ERROROROROROROR:", e)
                     console.log(e)
                 })
         }

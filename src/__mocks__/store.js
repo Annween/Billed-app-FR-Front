@@ -1,6 +1,5 @@
 const mockedBills = {
   list() {
-    console.log("JE ME SUIS FAIT APPELÉ!!!!!!!!!!!! AU VIOLEUR!!!")
     return Promise.resolve([{
       "id": "47qAXb6fIm2zOKkLzMro",
       "vat": "80",
