@@ -135,68 +135,7 @@ describe("Given I am a user connected as Employee", () => {
         })
 
     })
-    describe("When an error occurs on API", () => {
-	    // beforeEach((object, method) => {
-	    //   jest.spyOn(mockStore, "bills")
-	    //     console.log('ici ------------------')
-	    //   Object.defineProperty(
-	    //       window,
-	    //       'localStorage',
-	    //       { value: localStorageMock }
-	    //   )
 
-	    //     console.log('la ------------------>')
-	    //   window.localStorage.setItem('user', JSON.stringify({
-	    //     type: 'Employee',
-	    //     email: "a@a"
-	    //   }))
-
-	    //     console.log('encore ici <------------------>')
-	    //   const root = document.createElement("div")
-	    //   root.setAttribute("id", "root")
-	    //   document.body.appendChild(root)
-	    //   router()
-
-	    //     console.log('encore là <<------------------>>')
-	    // })
-
-
-	  // test("fetches bills from an API and fails with 401 message error", async () => {
-
-	  //     jest.spyOn(mockStore, "bills")
-
-	  //     Object.defineProperty(
-	  //         window,
-	  //         'localStorage',
-	  //         { value: localStorageMock }
-	  //     )
-
-
-	  //     window.localStorage.setItem('user', JSON.stringify({
-	  //         type: 'Employee',
-	  //         email: "a@a"
-	  //     }))
-
-
-	  //     const root = document.createElement("div")
-	  //     root.setAttribute("id", "root")
-	  //     document.body.appendChild(root)
-	  //     router()
-
-
-	  //   mockStore.bills.mockImplementationOnce(() => {
-	  //     return {
-	  //       list : () =>  {
-	  //         return Promise.reject(new Error("Erreur 401"))
-	  //       }
-	  //     }})
-	  //   window.onNavigate(ROUTES_PATH.Bills)
-
-	  //   const message = await screen.getByText("user must be authenticated")
-	  //   expect(message).toBeTruthy()
-	  // })
-
-    })
 
 })
 
