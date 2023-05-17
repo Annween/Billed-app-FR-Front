@@ -23,7 +23,10 @@ export default class NewBill {
     const fileName = filePath[filePath.length - 1]
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
-    if (!this.checkFileExtension(fileName.split('.').pop())) return false;
+    if (!this.checkFileExtension(fileName.split('.').pop())){
+	     alert('Le format du fichier n\'est pas valide')
+    }
+
 
     formData.append('file', file)
     formData.append('email', email)
